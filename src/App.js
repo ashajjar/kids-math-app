@@ -42,7 +42,10 @@ function App() {
             case 1:
                 return <StartScreen onStart={handleStart}/>;
             case 2:
-                return <EquationDisplay equations={equations} onFinish={handleFinishEquations}/>;
+                return <EquationDisplay
+                    equations={equations}
+                    onFinish={handleFinishEquations}
+                    groupSize={settings.groupSize}/>;
             case 3:
                 return <ReviewAnswers equations={equations} answers={answers} onRestart={handleRestart}/>;
             default:

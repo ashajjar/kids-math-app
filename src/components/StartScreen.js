@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 function StartScreen(props) {
     const [maxNumber, setMaxNumber] = useState(10);
@@ -10,6 +10,11 @@ function StartScreen(props) {
         division: false
     });
     const [printMode, setPrintMode] = useState(true);
+    const [groupSize, setGroupSize] = useState(5); // Default group size
+
+    const handleGroupSizeChange = (e) => {
+        setGroupSize(e.target.value);
+    };
 
     const handleNumberChange = (e) => {
         setMaxNumber(e.target.value);
@@ -20,7 +25,7 @@ function StartScreen(props) {
     };
 
     const handleOperationChange = (e) => {
-        setOperations({ ...operations, [e.target.name]: e.target.checked });
+        setOperations({...operations, [e.target.name]: e.target.checked});
     };
 
     const handlePrintModeChange = (e) => {
@@ -33,7 +38,8 @@ function StartScreen(props) {
             maxNumber,
             numEquations,
             operations,
-            printMode
+            printMode,
+            groupSize,
         });
     };
 
@@ -41,39 +47,48 @@ function StartScreen(props) {
         <form onSubmit={handleSubmit}>
             <label>
                 Maximum Number:
-                <input type="number" value={maxNumber} onChange={handleNumberChange} />
+                <input type="number" value={maxNumber} onChange={handleNumberChange}/>
             </label>
-            <br />
+            <br/>
             <label>
                 Number of Equations:
-                <input type="number" value={numEquations} onChange={handleNumEquationsChange} />
+                <input type="number" value={numEquations} onChange={handleNumEquationsChange}/>
             </label>
-            <br />
+            <br/>
+            <label>
+                Group Size:
+                <input type="number" value={groupSize} onChange={handleGroupSizeChange}/>
+            </label>
+            <br/>
             <fieldset>
                 <legend>Operations</legend>
                 <label>
-                    <input type="checkbox" name="addition" checked={operations.addition} onChange={handleOperationChange} />
+                    <input type="checkbox" name="addition" checked={operations.addition}
+                           onChange={handleOperationChange}/>
                     Addition
                 </label>
                 <label>
-                    <input type="checkbox" name="subtraction" checked={operations.subtraction} onChange={handleOperationChange} />
+                    <input type="checkbox" name="subtraction" checked={operations.subtraction}
+                           onChange={handleOperationChange}/>
                     Subtraction
                 </label>
                 <label>
-                    <input type="checkbox" name="multiplication" checked={operations.multiplication} onChange={handleOperationChange} />
+                    <input type="checkbox" name="multiplication" checked={operations.multiplication}
+                           onChange={handleOperationChange}/>
                     Multiplication
                 </label>
                 <label>
-                    <input type="checkbox" name="division" checked={operations.division} onChange={handleOperationChange} />
+                    <input type="checkbox" name="division" checked={operations.division}
+                           onChange={handleOperationChange}/>
                     Division
                 </label>
             </fieldset>
-            <br />
+            <br/>
             <label>
                 Print Mode:
-                <input type="checkbox" checked={printMode} onChange={handlePrintModeChange} />
+                <input type="checkbox" checked={printMode} onChange={handlePrintModeChange}/>
             </label>
-            <br />
+            <br/>
             <button type="submit">Start</button>
         </form>
     );

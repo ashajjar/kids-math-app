@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ReviewAnswers({ equations, answers, onRestart }) {
+function ReviewAnswers({equations, answers, onRestart}) {
     // Function to calculate the correct answer for an equation
     const calculateAnswer = (equation) => {
         // This is a simple parser for basic arithmetic equations
@@ -17,17 +17,26 @@ function ReviewAnswers({ equations, answers, onRestart }) {
     return (
         <div>
             <h2>Review Answers</h2>
-            <ul>
+            <table style={{width: '100%', borderCollapse: 'collapse'}}>
+                <tbody>
                 {equations.map((equation, index) => {
                     const correctAnswer = calculateAnswer(equation);
                     const isCorrect = answers[index] === correctAnswer;
                     return (
-                        <li key={index}>
-                            {equation} = {answers[index]} - {isCorrect ? 'Correct' : 'Incorrect'}
-                        </li>
+                        <tr key={index} style={{color: isCorrect ? 'green' : 'red', borderBottom: '1px solid black'}}>
+                            <td style={{textAlign: 'right'}}>
+                                {isCorrect ? '✓' : 'X'}
+                            </td>
+                            <td style={{borderRight: '1px solid black'}}></td>
+                            <td></td>
+                            <td style={{textAlign: 'left'}}>
+                                {equation} = {answers[index]}
+                            </td>
+                        </tr>
                     );
                 })}
-            </ul>
+                </tbody>
+            </table>
             <button onClick={onRestart}>Back to Start</button>
         </div>
     );

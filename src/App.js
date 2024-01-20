@@ -87,7 +87,7 @@ const printEquations = (equations) => {
     let printableContent = `
       <style>
         .print-container { display: flex; flex-wrap: wrap; justify-content: space-around; }
-        .equation-table { margin: 10px; width: 30%; border-collapse: collapse; }
+        .equation-table { margin: 10px; width: 30%; border-collapse: collapse; page-break-inside: avoid; }
         .equation-table td { border: 1px solid black; padding: 10px; text-align: center; }
         .answer-space { width: 50px; }
       </style>
@@ -112,6 +112,5 @@ const printEquations = (equations) => {
     newWindow.print();
     newWindow.close();
 };
-
 
 export default App;

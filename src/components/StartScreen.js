@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 function StartScreen(props) {
     const [maxNumber, setMaxNumber] = useState(10);
-    const [numEquations, setNumEquations] = useState(5);
+    const [numEquations, setNumEquations] = useState(60);
     const [operations, setOperations] = useState({
         addition: true,
         subtraction: false,
         multiplication: false,
         division: false
     });
-    const [printMode, setPrintMode] = useState(false);
+    const [printMode, setPrintMode] = useState(true);
 
     const handleNumberChange = (e) => {
         setMaxNumber(e.target.value);

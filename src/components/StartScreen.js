@@ -32,14 +32,23 @@ function StartScreen(props) {
         setPrintMode(e.target.checked);
     };
 
+
+    const [error, setError] = useState(''); // State to handle error message
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        // Check if at least one operation is selected
+        if (!operations.addition && !operations.subtraction && !operations.multiplication && !operations.division) {
+            setError('Please select at least one operation.');
+            return;
+        }
+        setError(''); // Clear any existing error
         props.onStart({
             maxNumber,
             numEquations,
             operations,
             printMode,
-            groupSize,
+            groupSize
         });
     };
 
@@ -89,6 +98,7 @@ function StartScreen(props) {
                 <input type="checkbox" checked={printMode} onChange={handlePrintModeChange}/>
             </label>
             <br/>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
             <button type="submit">Start</button>
         </form>
     );

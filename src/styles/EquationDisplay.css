@@ -1,0 +1,66 @@
+/* EquationDisplay.css */
+
+.equation-display {
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    height: 100vh; /* Make the container fill the full viewport height */
+    background-color: #E6E6FA; /* Light violet background */
+    color: #8A2BE2; /* Primary violet color for text */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.equation-container {
+    width: 100%; /* Fill the screen width */
+    max-width: 600px; /* Maximum width */
+    text-align: center; /* Center the content */
+    margin-bottom: 20px; /* Space between equations and navigation buttons */
+}
+
+/* Style for individual equations */
+.equation {
+    margin-bottom: 15px; /* Space between each equation */
+    font-size: xxx-large;
+}
+
+.equation input {
+    margin: 5px;
+    width: 70px;
+    height: 50px;
+    font-size: xxx-large;
+    color: #9a64cb;
+}
+
+.primary-button {
+    background-color: #8A2BE2; /* Primary violet color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+    background-color: #7D26CD; /* Slightly darker violet on hover */
+}
+
+.secondary-button {
+    background-color: #B0A1D3; /* Lighter violet or another secondary color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.secondary-button:hover {
+    background-color: #9F90C1; /* Slightly darker version of the secondary color */
+}
+
+.button-container button {
+    margin: 5px;
+}

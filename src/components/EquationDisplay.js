@@ -1,16 +1,18 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/EquationDisplay.css';
 
-function EquationDisplay({equations, onFinish, groupSize}) {
+function EquationDisplay({ equations, onFinish, groupSize }) {
     const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
     const [answers, setAnswers] = useState(equations.map(() => ''));
-    const firstInputRef = useRef(null);
+    const inputRefs = useRef(equations.map(() => React.createRef()));
 
     useEffect(() => {
-        if (firstInputRef.current) {
-            firstInputRef.current.focus();
+        // Focus the first input field of the current group
+        const firstInputIndex = currentGroupIndex * groupSize;
+        if (inputRefs.current[firstInputIndex]) {
+            inputRefs.current[firstInputIndex].current.focus();
         }
-    }, [currentGroupIndex]);
+    }, [currentGroupIndex, groupSize]);
 
     const handleAnswerChange = (e, index) => {
         const updatedAnswers = [...answers];
@@ -35,27 +37,19 @@ function EquationDisplay({equations, onFinish, groupSize}) {
                     <div key={index} className="equation">
                         <label>
                             {equation}
-
                             <input
                                 type="number"
                                 value={answers[currentGroupIndex * groupSize + index]}
                                 onChange={(e) => handleAnswerChange(e, currentGroupIndex * groupSize + index)}
-                                ref={index === 0 ? firstInputRef : null}
+                                ref={inputRefs.current[currentGroupIndex * groupSize + index]}
                             />
-
                         </label>
                     </div>
                 ))}
             </div>
             <div className="button-container">
-
-                <button onClick={goToPreviousGroup} disabled={currentGroupIndex === 0}
-                        className="primary-button">Previous
-                </button>
-                <button onClick={goToNextGroup}
-                        disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1}
-                        className="primary-button">Next
-                </button>
+                <button onClick={goToPreviousGroup} disabled={currentGroupIndex === 0} className="primary-button">Previous</button>
+                <button onClick={goToNextGroup} disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1} className="primary-button">Next</button>
                 <button onClick={() => onFinish(answers)} className="primary-button">Finish</button>
             </div>
         </div>

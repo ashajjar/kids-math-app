@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/ReviewAnswers.css';
 
 function ReviewAnswers({equations, answers, onRestart}) {
     // Function to calculate the correct answer for an equation
@@ -15,20 +16,21 @@ function ReviewAnswers({equations, answers, onRestart}) {
     };
 
     return (
-        <div>
+        <div className="review-answers">
             <h2>Review Answers</h2>
-            <table style={{width: '100%', borderCollapse: 'collapse'}}>
+            <table className="review-table">
                 <tbody>
                 {equations.map((equation, index) => {
                     const correctAnswer = calculateAnswer(equation);
                     const isCorrect = answers[index] === correctAnswer;
+                    const answerClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
+
                     return (
-                        <tr key={index} style={{color: isCorrect ? 'green' : 'red', borderBottom: '1px solid black'}}>
-                            <td style={{textAlign: 'right'}}>
+                        <tr key={index} >
+                            <td style={{textAlign: 'right'}} className={answerClass}>
                                 {isCorrect ? '✓' : 'X'}
                             </td>
-                            <td style={{borderRight: '1px solid black'}}></td>
-                            <td></td>
+
                             <td style={{textAlign: 'left'}}>
                                 {equation} = {answers[index]}
                             </td>
@@ -37,7 +39,7 @@ function ReviewAnswers({equations, answers, onRestart}) {
                 })}
                 </tbody>
             </table>
-            <button onClick={onRestart}>Back to Start</button>
+            <button onClick={onRestart} className="primary-button">Back to Start</button>
         </div>
     );
 }

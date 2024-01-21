@@ -47,6 +47,11 @@
     background-color: #7D26CD; /* Slightly darker violet on hover */
 }
 
+.primary-button:disabled{
+    background-color: #9F90C1;
+    cursor: not-allowed;
+}
+
 .secondary-button {
     background-color: #B0A1D3; /* Lighter violet or another secondary color */
     color: white;

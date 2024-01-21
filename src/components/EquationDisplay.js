@@ -50,11 +50,11 @@ function EquationDisplay({equations, onFinish, groupSize}) {
             <div className="button-container">
 
                 <button onClick={goToPreviousGroup} disabled={currentGroupIndex === 0}
-                        className="secondary-button">Previous
+                        className="primary-button">Previous
                 </button>
                 <button onClick={goToNextGroup}
                         disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1}
-                        className="secondary-button">Next
+                        className="primary-button">Next
                 </button>
                 <button onClick={() => onFinish(answers)} className="primary-button">Finish</button>
             </div>

@@ -24,6 +24,12 @@ function App() {
         }
     };
 
+    const handlePrint = (userSettings) => {
+        setSettings(userSettings);
+        const generatedEquations = generateEquations(userSettings);
+        printEquations(generatedEquations);
+    };
+
     const handleRestart = () => {
         // Reset the application state to initial
         setStep(1);
@@ -40,7 +46,7 @@ function App() {
     const renderStep = () => {
         switch (step) {
             case 1:
-                return <StartScreen onStart={handleStart}/>;
+                return <StartScreen onStart={handleStart} onPrint={handlePrint}/>;
             case 2:
                 return <EquationDisplay
                     equations={equations}

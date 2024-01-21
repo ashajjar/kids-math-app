@@ -11,7 +11,6 @@ function StartScreen(props) {
         multiplication: false,
         division: false
     });
-    const [printMode, setPrintMode] = useState(true);
     const [groupSize, setGroupSize] = useState(5); // Default group size
     const [allowNegativeResults, setAllowNegativeResults] = useState(false);
 
@@ -35,8 +34,21 @@ function StartScreen(props) {
         setOperations({...operations, [e.target.name]: e.target.checked});
     };
 
-    const handlePrintModeChange = (e) => {
-        setPrintMode(e.target.checked);
+    const handlePrint = (e) => {
+        e.preventDefault();
+        // Check if at least one operation is selected
+        if (!operations.addition && !operations.subtraction && !operations.multiplication && !operations.division) {
+            setError('Please select at least one operation.');
+            return;
+        }
+        setError(''); // Clear any existing error
+        props.onPrint({
+            maxNumber,
+            numEquations,
+            operations,
+            groupSize,
+            allowNegativeResults,
+        });
     };
 
 
@@ -54,7 +66,6 @@ function StartScreen(props) {
             maxNumber,
             numEquations,
             operations,
-            printMode,
             groupSize,
             allowNegativeResults,
         });
@@ -113,13 +124,9 @@ function StartScreen(props) {
                         </label>
                     </fieldset>
                     <br/>
-                    <label>
-                        Print Mode:
-                        <input type="checkbox" checked={printMode} onChange={handlePrintModeChange}/>
-                    </label>
-                    <br/>
                     {error && <div style={{color: 'red'}}>{error}</div>}
-                    <button type="submit">Start</button>
+                    <button type="submit">Start Solving</button>
+                    <button type="button" onClick={handlePrint}>Print Equations</button>
                 </form>
             </div>
         </div>

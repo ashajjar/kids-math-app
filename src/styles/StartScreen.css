@@ -29,8 +29,7 @@
 
 /* Style for buttons */
 .form-container button {
-    margin-top: 10px; /* Space above the button */
-    /* Additional button styling can go here */
+    margin: 10px;
 }
 
 .form-container label {

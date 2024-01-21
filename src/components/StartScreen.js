@@ -11,6 +11,11 @@ function StartScreen(props) {
     });
     const [printMode, setPrintMode] = useState(true);
     const [groupSize, setGroupSize] = useState(5); // Default group size
+    const [allowNegativeResults, setAllowNegativeResults] = useState(false);
+
+    const handleAllowNegativeResultsChange = (e) => {
+        setAllowNegativeResults(e.target.checked);
+    };
 
     const handleGroupSizeChange = (e) => {
         setGroupSize(e.target.value);
@@ -48,7 +53,8 @@ function StartScreen(props) {
             numEquations,
             operations,
             printMode,
-            groupSize
+            groupSize,
+            allowNegativeResults,
         });
     };
 
@@ -67,6 +73,15 @@ function StartScreen(props) {
             <label>
                 Group Size:
                 <input type="number" value={groupSize} onChange={handleGroupSizeChange}/>
+            </label>
+            <br/>
+            <label>
+                Allow Negative Results:
+                <input
+                    type="checkbox"
+                    checked={allowNegativeResults}
+                    onChange={handleAllowNegativeResultsChange}
+                />
             </label>
             <br/>
             <fieldset>
@@ -98,7 +113,7 @@ function StartScreen(props) {
                 <input type="checkbox" checked={printMode} onChange={handlePrintModeChange}/>
             </label>
             <br/>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
+            {error && <div style={{color: 'red'}}>{error}</div>}
             <button type="submit">Start</button>
         </form>
     );

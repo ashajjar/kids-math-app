@@ -61,7 +61,7 @@ function App() {
 }
 
 function generateEquations(settings) {
-    const {maxNumber, numEquations, operations} = settings;
+    const {maxNumber, numEquations, operations, allowNegativeResults} = settings;
     const equations = [];
     const operationSymbols = {
         addition: '+',
@@ -74,12 +74,21 @@ function generateEquations(settings) {
         .map(([op]) => op);
 
     for (let i = 0; i < numEquations; i++) {
-        const a = Math.floor(Math.random() * (maxNumber + 1));
-        const b = Math.floor(Math.random() * (maxNumber + 1));
+        let a = Math.floor(Math.random() * (maxNumber + 1));
+        let b = Math.floor(Math.random() * (maxNumber + 1));
         const operation = enabledOperations[Math.floor(Math.random() * enabledOperations.length)];
         const symbol = operationSymbols[operation];
 
-        let equation = `${a} ${symbol} ${b}`;
+
+        if (!allowNegativeResults && operation === 'subtraction' && a < b) {
+            [a, b] = [b, a]; // Swap to avoid negative result
+        }
+
+        if (!allowNegativeResults && operation === 'division' && b === 0) {
+            b = 1; // adjust to avoid division by zero
+        }
+
+        const equation = `${a} ${symbol} ${b}`;
         equations.push(equation);
     }
 

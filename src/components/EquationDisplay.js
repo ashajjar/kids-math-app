@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import '../styles/EquationDisplay.css';
+import {useTranslation} from "react-i18next";
 
-function EquationDisplay({ equations, onFinish, groupSize }) {
+function EquationDisplay({equations, onFinish, groupSize}) {
     const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
     const [answers, setAnswers] = useState(equations.map(() => ''));
     const inputRefs = useRef(equations.map(() => React.createRef()));
@@ -30,6 +31,8 @@ function EquationDisplay({ equations, onFinish, groupSize }) {
         }
     };
 
+    const {t} = useTranslation();
+
     return (
         <div className="equation-display">
             <div className="equation-container">
@@ -48,9 +51,12 @@ function EquationDisplay({ equations, onFinish, groupSize }) {
                 ))}
             </div>
             <div className="button-container">
-                <button onClick={goToPreviousGroup} disabled={currentGroupIndex === 0} className="primary-button">Previous</button>
-                <button onClick={goToNextGroup} disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1} className="primary-button">Next</button>
-                <button onClick={() => onFinish(answers)} className="primary-button">Finish</button>
+                <button onClick={goToPreviousGroup} disabled={currentGroupIndex === 0}
+                        className="primary-button">{t('equations.previous')}</button>
+                <button onClick={goToNextGroup}
+                        disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1}
+                        className="primary-button">{t('equations.next')}</button>
+                <button onClick={() => onFinish(answers)} className="primary-button">{t('equations.finish')}</button>
             </div>
         </div>
     );

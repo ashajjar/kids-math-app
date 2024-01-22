@@ -22,6 +22,15 @@ await i18n
                         },
                         solve: "Start Solving",
                         print: "Print Equations",
+                    },
+                    equations: {
+                        next: 'Next',
+                        previous: 'Previous',
+                        finish: 'Finish',
+                    },
+                    review: {
+                        title: 'Review Answers',
+                        back: 'Back to Start'
                     }
                 }
             },
@@ -42,6 +51,15 @@ await i18n
                         },
                         solve: "Mit dem Lösen beginnen",
                         print: "Gleichungen drucken",
+                    },
+                    equations: {
+                        next: 'Weiter',
+                        previous: 'Zurück',
+                        finish: 'Fertig',
+                    },
+                    review: {
+                        title: 'Antworten überprüfen',
+                        back: 'Zurück zum Start'
                     }
                 }
             }

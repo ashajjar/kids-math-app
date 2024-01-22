@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/ReviewAnswers.css';
+import {useTranslation} from "react-i18next";
 
 function ReviewAnswers({equations, answers, onRestart}) {
     // Function to calculate the correct answer for an equation
@@ -14,10 +15,11 @@ function ReviewAnswers({equations, answers, onRestart}) {
             return null;
         }
     };
+    const {t} = useTranslation();
 
     return (
         <div className="review-answers">
-            <h2>Review Answers</h2>
+            <h2>{t('review.title')}</h2>
             <table className="review-table">
                 <tbody>
                 {equations.map((equation, index) => {
@@ -39,7 +41,7 @@ function ReviewAnswers({equations, answers, onRestart}) {
                 })}
                 </tbody>
             </table>
-            <button onClick={onRestart} className="primary-button">Back to Start</button>
+            <button onClick={onRestart} className="primary-button">{t('review.back')}</button>
         </div>
     );
 }

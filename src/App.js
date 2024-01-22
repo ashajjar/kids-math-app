@@ -93,7 +93,7 @@ function generateEquations(settings) {
             [a, b] = [b, a]; // Swap to avoid negative result
         }
 
-        if (!allowNegativeResults && operation === 'division' && b === 0) {
+        if (operation === 'division' && b === 0) {
             b = 1; // adjust to avoid division by zero
         }
 

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import StartScreen from './components/StartScreen';
 import EquationDisplay from './components/EquationDisplay';
 import ReviewAnswers from './components/ReviewAnswers';
+import './i18n'; // Path to your i18n config file
+import Header from "./components/Header";
 
 function App() {
     const [step, setStep] = useState(1);
@@ -61,6 +63,7 @@ function App() {
 
     return (
         <div className="App">
+            <Header/>
             {renderStep()}
         </div>
     );

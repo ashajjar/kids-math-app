@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import '../styles/StartScreen.css';
+import {useTranslation} from 'react-i18next';
 
 
 function StartScreen(props) {
+    const {t} = useTranslation();
     const [maxNumber, setMaxNumber] = useState(10);
     const [numEquations, setNumEquations] = useState(60);
     const [operations, setOperations] = useState({
@@ -73,26 +75,26 @@ function StartScreen(props) {
 
     return (
         <div className="start-screen">
-            <h1>Kids Math App</h1>
+            <h1>{t('startScreen.title')}</h1>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Maximum Number
+                        {t('startScreen.maxNumber')}
                         <input type="number" value={maxNumber} onChange={handleNumberChange}/>
                     </label>
                     <br/>
                     <label>
-                        Number of Equations
+                        {t('startScreen.equationsCount')}
                         <input type="number" value={numEquations} onChange={handleNumEquationsChange}/>
                     </label>
                     <br/>
                     <label>
-                        Group Size
+                        {t('startScreen.groupSize')}
                         <input type="number" value={groupSize} onChange={handleGroupSizeChange}/>
                     </label>
                     <br/>
                     <label>
-                        Allow Negative Results
+                        {t('startScreen.isNegativeAllowed')}
                         <input
                             type="checkbox"
                             checked={allowNegativeResults}
@@ -101,32 +103,32 @@ function StartScreen(props) {
                     </label>
                     <br/>
                     <fieldset className="operations-group">
-                        <legend>Operations</legend>
+                        <legend>{t('startScreen.ops')}</legend>
                         <label>
                             <input type="checkbox" name="addition" checked={operations.addition}
                                    onChange={handleOperationChange}/>
-                            Addition
+                            {t('startScreen.op.add')}
                         </label>
                         <label>
                             <input type="checkbox" name="subtraction" checked={operations.subtraction}
                                    onChange={handleOperationChange}/>
-                            Subtraction
+                            {t('startScreen.op.sub')}
                         </label>
                         <label>
                             <input type="checkbox" name="multiplication" checked={operations.multiplication}
                                    onChange={handleOperationChange}/>
-                            Multiplication
+                            {t('startScreen.op.mul')}
                         </label>
                         <label>
                             <input type="checkbox" name="division" checked={operations.division}
                                    onChange={handleOperationChange}/>
-                            Division
+                            {t('startScreen.op.div')}
                         </label>
                     </fieldset>
                     <br/>
                     {error && <div style={{color: 'red'}}>{error}</div>}
-                    <button type="submit">Start Solving</button>
-                    <button type="button" onClick={handlePrint}>Print Equations</button>
+                    <button type="submit">{t('startScreen.solve')}</button>
+                    <button type="button" onClick={handlePrint}>{t('startScreen.print')}</button>
                 </form>
             </div>
         </div>

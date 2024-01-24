@@ -15,15 +15,9 @@ function App() {
         setSettings(userSettings);
         const generatedEquations = generateEquations(userSettings);
 
-        if (userSettings.printMode) {
-            // Handle print mode
-            printEquations(generatedEquations);
-        } else {
-            // Interactive mode
-            setEquations(generatedEquations);
-            setAnswers(new Array(generatedEquations.length).fill(''));
-            setStep(2);
-        }
+        setEquations(generatedEquations);
+        setAnswers(new Array(generatedEquations.length).fill(''));
+        setStep(2);
     };
 
     const handlePrint = (userSettings) => {
@@ -70,7 +64,7 @@ function App() {
 }
 
 function generateEquations(settings) {
-    const {maxNumber, numEquations, operations, allowNegativeResults} = settings;
+    const {maxNumber, numEquations, operations, allowNegativeResults, maxResult} = settings;
     const equations = [];
     const operationSymbols = {
         addition: '+',
@@ -95,6 +89,12 @@ function generateEquations(settings) {
 
         if (operation === 'division' && b === 0) {
             b = 1; // adjust to avoid division by zero
+        }
+
+        if (operation === 'addition' && a + b > maxResult + 1) {
+            let diff = Math.floor(((a + b) - maxResult + 1) / 2);
+            a -= diff;
+            b -= diff;
         }
 
         const equation = `${a} ${symbol} ${b}`;

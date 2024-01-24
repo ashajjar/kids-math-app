@@ -10,6 +10,7 @@ await i18n
                     startScreen: {
                         title: "Kids Math",
                         maxNumber: "Maximum Number",
+                        maxResult: "Maximum Result (applies for addition only)",
                         equationsCount: "Equation count to generate",
                         groupSize: "Equations group size",
                         isNegativeAllowed: "Allow negative results",
@@ -39,6 +40,7 @@ await i18n
                     startScreen: {
                         title: "Kinder Mathe",
                         maxNumber: "Maximale Zahl",
+                        maxResult: "Maximalergebnis (gilt nur für Addition)",
                         equationsCount: "Anzahl der zu generierenden Gleichungen",
                         groupSize: "Gruppengröße der Gleichungen",
                         isNegativeAllowed: "Negative Ergebnisse zulassen",

@@ -6,6 +6,7 @@ import {useTranslation} from 'react-i18next';
 function StartScreen(props) {
     const {t} = useTranslation();
     const [maxNumber, setMaxNumber] = useState(10);
+    const [maxResult, setMaxResult] = useState(10);
     const [numEquations, setNumEquations] = useState(60);
     const [operations, setOperations] = useState({
         addition: true,
@@ -26,6 +27,10 @@ function StartScreen(props) {
 
     const handleNumberChange = (e) => {
         setMaxNumber(e.target.value);
+    };
+
+    const handleMaxResultChange = (e) => {
+        setMaxResult(e.target.value);
     };
 
     const handleNumEquationsChange = (e) => {
@@ -50,6 +55,7 @@ function StartScreen(props) {
             operations,
             groupSize,
             allowNegativeResults,
+            maxResult,
         });
     };
 
@@ -70,6 +76,7 @@ function StartScreen(props) {
             operations,
             groupSize,
             allowNegativeResults,
+            maxResult
         });
     };
 
@@ -91,6 +98,11 @@ function StartScreen(props) {
                     <label>
                         {t('startScreen.groupSize')}
                         <input type="number" value={groupSize} onChange={handleGroupSizeChange}/>
+                    </label>
+                    <br/>
+                    <label>
+                        {t('startScreen.maxResult')}
+                        <input type="number" value={maxResult} onChange={handleMaxResultChange}/>
                     </label>
                     <br/>
                     <label>

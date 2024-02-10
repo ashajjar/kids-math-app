@@ -17,7 +17,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
 
     const handleAnswerChange = (e, index) => {
         const updatedAnswers = [...answers];
-        updatedAnswers[index] = e.target.value;
+        updatedAnswers[index] = parseInt(e.target.value);
         setAnswers(updatedAnswers);
     };
 

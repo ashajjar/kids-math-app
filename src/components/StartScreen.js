@@ -22,19 +22,19 @@ function StartScreen(props) {
     };
 
     const handleGroupSizeChange = (e) => {
-        setGroupSize(e.target.value);
+        setGroupSize(parseInt(e.target.value));
     };
 
     const handleNumberChange = (e) => {
-        setMaxNumber(e.target.value);
+        setMaxNumber(parseInt(e.target.value));
     };
 
     const handleMaxResultChange = (e) => {
-        setMaxResult(e.target.value);
+        setMaxResult(parseInt(e.target.value));
     };
 
     const handleNumEquationsChange = (e) => {
-        setNumEquations(e.target.value);
+        setNumEquations(parseInt(e.target.value));
     };
 
     const handleOperationChange = (e) => {

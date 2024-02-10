@@ -14,6 +14,7 @@ await i18n
                         equationsCount: "Equation count to generate",
                         groupSize: "Equations group size",
                         isNegativeAllowed: "Allow negative results",
+                        isGeneratingCombinations: "Generate complementing operations",
                         ops: "Operations",
                         op: {
                             add: "Addition",
@@ -44,6 +45,7 @@ await i18n
                         equationsCount: "Anzahl der zu generierenden Gleichungen",
                         groupSize: "Gruppengröße der Gleichungen",
                         isNegativeAllowed: "Negative Ergebnisse zulassen",
+                        isGeneratingCombinations: "Ergänzende Operationen generieren",
                         ops: "Operationen",
                         op: {
                             add: "Addition",

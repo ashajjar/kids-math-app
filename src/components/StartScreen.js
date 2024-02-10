@@ -16,12 +16,22 @@ function StartScreen(props) {
     });
     const [groupSize, setGroupSize] = useState(5); // Default group size
     const [allowNegativeResults, setAllowNegativeResults] = useState(false);
+    const [isGeneratingCombinations, setIsGeneratingCombinations] = useState(false);
 
     const handleAllowNegativeResultsChange = (e) => {
         setAllowNegativeResults(e.target.checked);
     };
 
+    const handleIsGeneratingCombinationsChange = (e) => {
+        setIsGeneratingCombinations(e.target.checked)
+        setGroupSize(3);
+    };
+
     const handleGroupSizeChange = (e) => {
+        if (isGeneratingCombinations) {
+            setGroupSize(3);
+            return;
+        }
         setGroupSize(parseInt(e.target.value));
     };
 
@@ -56,6 +66,7 @@ function StartScreen(props) {
             groupSize,
             allowNegativeResults,
             maxResult,
+            isGeneratingCombinations
         });
     };
 
@@ -76,7 +87,8 @@ function StartScreen(props) {
             operations,
             groupSize,
             allowNegativeResults,
-            maxResult
+            maxResult,
+            isGeneratingCombinations,
         });
     };
 
@@ -97,7 +109,7 @@ function StartScreen(props) {
                     <br/>
                     <label>
                         {t('startScreen.groupSize')}
-                        <input type="number" value={groupSize} onChange={handleGroupSizeChange}/>
+                        <input type="number" value={groupSize} onChange={handleGroupSizeChange} disabled={isGeneratingCombinations}/>
                     </label>
                     <br/>
                     <label>
@@ -111,6 +123,14 @@ function StartScreen(props) {
                             type="checkbox"
                             checked={allowNegativeResults}
                             onChange={handleAllowNegativeResultsChange}
+                        />
+                    </label>
+                    <label>
+                        {t('startScreen.isGeneratingCombinations')}
+                        <input
+                            type="checkbox"
+                            checked={isGeneratingCombinations}
+                            onChange={handleIsGeneratingCombinationsChange}
                         />
                     </label>
                     <br/>

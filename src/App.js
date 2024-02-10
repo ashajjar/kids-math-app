@@ -23,7 +23,7 @@ function App() {
     const handlePrint = (userSettings) => {
         setSettings(userSettings);
         const generatedEquations = generateEquations(userSettings);
-        printEquations(generatedEquations);
+        printEquations(generatedEquations, userSettings.groupSize);
     };
 
     const handleRestart = () => {
@@ -63,8 +63,39 @@ function App() {
     );
 }
 
+function generateComplementingEquations(equations, a, b, operation) {
+    let c;
+    switch (operation) {
+        case 'addition':
+            c = a + b;
+            equations.push(`${c} - ${b}`);
+            equations.push(`${c} - ${a}`);
+            break;
+        case 'subtraction':
+            c = a - b;
+            equations.push(`${a} - ${c}`);
+            equations.push(`${b} + ${c}`);
+            break;
+        case 'multiplication':
+            c = a * b;
+            equations.push(`${c} / ${a}`);
+            equations.push(`${c} / ${b}`);
+            break;
+        case 'division':
+            c = a / b;
+            equations.push(`${c} * ${b}`);
+            equations.push(`${c} / ${a}`);
+            break;
+        default:
+            break;
+    }
+}
+
 function generateEquations(settings) {
-    const {maxNumber, numEquations, operations, allowNegativeResults, maxResult} = settings;
+    const {maxNumber, numEquations, operations, allowNegativeResults, maxResult, isGeneratingCombinations} = settings;
+
+    const numEquationsModifier = isGeneratingCombinations ? 3 : 1;
+    let number = (numEquations / numEquationsModifier) + (isGeneratingCombinations ? 1 : 0);
     const equations = [];
     const operationSymbols = {
         addition: '+',
@@ -76,7 +107,7 @@ function generateEquations(settings) {
         .filter(([op, isEnabled]) => isEnabled)
         .map(([op]) => op);
 
-    for (let i = 0; i < numEquations; i++) {
+    for (let i = 0; i < number; i++) {
         let a = Math.floor(Math.random() * (maxNumber + 1));
         let b = Math.floor(Math.random() * (maxNumber + 1));
         const operation = enabledOperations[Math.floor(Math.random() * enabledOperations.length)];
@@ -87,8 +118,11 @@ function generateEquations(settings) {
             [a, b] = [b, a]; // Swap to avoid negative result
         }
 
-        if (operation === 'division' && b === 0) {
-            b = 1; // adjust to avoid division by zero
+        if (operation === 'division') {
+            if (b === 0) {
+                b = 1; // adjust to avoid division by zero
+            }
+            a = a * b; // to make sure only integers are generated
         }
 
         if (operation === 'addition' && a + b > maxResult + 1) {
@@ -99,12 +133,13 @@ function generateEquations(settings) {
 
         const equation = `${a} ${symbol} ${b}`;
         equations.push(equation);
+        generateComplementingEquations(equations, a, b, operation);
     }
 
     return equations;
 }
 
-const printEquations = (equations) => {
+const printEquations = (equations, groupSize) => {
     let printableContent = `
       <style>
         .print-container { display: flex; flex-wrap: wrap; justify-content: space-around; }
@@ -116,9 +151,9 @@ const printEquations = (equations) => {
 
     printableContent += '<div class="print-container">';
 
-    for (let i = 0; i < equations.length; i += 5) {
+    for (let i = 0; i < equations.length; i += groupSize) {
         printableContent += '<table class="equation-table">';
-        for (let j = i; j < i + 5 && j < equations.length; j++) {
+        for (let j = i; j < i + groupSize && j < equations.length; j++) {
             printableContent += `<tr><td>${equations[j]}</td><td class="answer-space"></td></tr>`;
         }
         printableContent += '</table>';

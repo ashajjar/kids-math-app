@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../styles/EquationDisplay.css';
 import {useTranslation} from "react-i18next";
 
@@ -19,6 +19,23 @@ function EquationDisplay({equations, onFinish, groupSize}) {
         const updatedAnswers = [...answers];
         updatedAnswers[index] = parseInt(e.target.value);
         setAnswers(updatedAnswers);
+    };
+
+    const handleAnswerKeyUp = (e, index) => {
+        if (e.key === 'Enter') {
+            if ((index + 1) >= equations.length) {
+                onFinish(answers);
+                return;
+            }
+            if ((index + 1) % groupSize === 0) {
+                goToNextGroup();
+                return;
+            }
+            inputRefs.current[index + 1].current.focus()
+        }
+        if (e.key === 'Escape') {
+            onFinish(answers);
+        }
     };
 
     const goToNextGroup = () => {
@@ -45,6 +62,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
                                 value={answers[currentGroupIndex * groupSize + index]}
                                 onChange={(e) => handleAnswerChange(e, currentGroupIndex * groupSize + index)}
                                 ref={inputRefs.current[currentGroupIndex * groupSize + index]}
+                                onKeyUp={(e) => handleAnswerKeyUp(e, currentGroupIndex * groupSize + index)}
                             />
                         </label>
                     </div>

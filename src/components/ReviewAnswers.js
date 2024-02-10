@@ -9,9 +9,7 @@ function ReviewAnswers({equations, answers, onRestart}) {
         // You might need a more robust solution for complex equations
         try {
             // eslint-disable-next-line no-eval
-            let toString = eval(equation.replace('×', '*').replace('÷', '/')).toString();
-            console.log(equation, toString);
-            return toString;
+            return eval(equation.replace('×', '*').replace('÷', '/')).toString();
         } catch (error) {
             console.error('Error calculating equation:', error);
             return null;

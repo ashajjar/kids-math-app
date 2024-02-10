@@ -78,13 +78,23 @@ function generateComplementingEquations(equations, a, b, operation) {
             break;
         case 'multiplication':
             c = a * b;
-            equations.push(`${c} / ${a}`);
-            equations.push(`${c} / ${b}`);
+            if (c !== 0) {
+                equations.push(`${c} ÷ ${a}`);
+                equations.push(`${c} ÷ ${b}`);
+                break;
+            }
+            equations.pop();
+            a++;
+            b++;
+            c = a * b;
+            equations.push(`${a} × ${b}`);
+            equations.push(`${c} ÷ ${a}`);
+            equations.push(`${c} ÷ ${b}`);
             break;
         case 'division':
             c = a / b;
-            equations.push(`${c} * ${b}`);
-            equations.push(`${c} / ${a}`);
+            equations.push(`${c} × ${b}`);
+            equations.push(`${c} ÷ ${a}`);
             break;
         default:
             break;
@@ -133,7 +143,7 @@ function generateEquations(settings) {
 
         const equation = `${a} ${symbol} ${b}`;
         equations.push(equation);
-        generateComplementingEquations(equations, a, b, operation);
+        isGeneratingCombinations && generateComplementingEquations(equations, a, b, operation);
     }
 
     return equations;

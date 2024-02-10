@@ -9,7 +9,9 @@ function ReviewAnswers({equations, answers, onRestart}) {
         // You might need a more robust solution for complex equations
         try {
             // eslint-disable-next-line no-eval
-            return eval(equation.replace('×', '*').replace('÷', '/')).toString();
+            let toString = eval(equation.replace('×', '*').replace('÷', '/')).toString();
+            console.log(equation, toString);
+            return toString;
         } catch (error) {
             console.error('Error calculating equation:', error);
             return null;
@@ -24,11 +26,11 @@ function ReviewAnswers({equations, answers, onRestart}) {
                 <tbody>
                 {equations.map((equation, index) => {
                     const correctAnswer = calculateAnswer(equation);
-                    const isCorrect = answers[index] === correctAnswer;
+                    const isCorrect = parseInt(answers[index]) === parseInt(correctAnswer);
                     const answerClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
 
                     return (
-                        <tr key={index} >
+                        <tr key={index}>
                             <td style={{textAlign: 'right'}} className={answerClass}>
                                 {isCorrect ? '✓' : 'X'}
                             </td>

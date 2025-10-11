@@ -180,8 +180,10 @@ function StartScreen(props) {
                     </fieldset>
                     <br/>
                     {error && <div style={{color: 'red'}}>{error}</div>}
-                    <button type="submit">{t('startScreen.solve')}</button>
-                    <button type="button" onClick={handlePrint}>{t('startScreen.print')}</button>
+                    <div className="button-container">
+                        <button type="submit">{t('startScreen.solve')}</button>
+                        <button type="button" onClick={handlePrint}>{t('startScreen.print')}</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -66,3 +66,18 @@
     padding: 10px;
     margin-bottom: 15px;
 }
+
+/* Mobile: stack action buttons and make them full width */
+@media (max-width: 600px) {
+    .form-container button {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+/* Center buttons side-by-side on wider screens */
+.button-container {
+    text-align: center;
+}

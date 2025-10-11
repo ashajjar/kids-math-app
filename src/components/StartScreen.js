@@ -115,7 +115,6 @@ function StartScreen(props) {
 
     return (
         <div className="start-screen">
-            <h1>{t('startScreen.title')}</h1>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <label>

@@ -9,8 +9,9 @@
     display: flex; /* Enable Flexbox */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
-    height: 100vh; /* Make the container fill the full viewport height */
+    justify-content: flex-start; /* Start content near the header */
+    min-height: 100vh; /* Ensure background fills screen without forcing vertical centering */
+    padding-top: 8px; /* Small space below sticky header */
     background-color: #E6E6FA; /* Light violet background */
 }
 

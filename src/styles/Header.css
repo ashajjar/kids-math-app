@@ -1,18 +1,36 @@
 /* Header.css */
 
 header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     display: flex;
-    justify-content: space-between; /* This will separate the title and the dropdown */
+    justify-content: space-between; /* Keep brand on the left, language select on the right */
     align-items: center;
-    padding: 10px;
+    padding: 6px 10px; /* thinner header */
     background-color: #8A2BE2; /* Adjust the color as per your theme */
     color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* subtle separation when sticky */
+}
+
+/* Group logo and title on the left */
+header .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between logo and title */
+}
+
+header img {
+    height: 28px; /* thinner logo */
+    width: auto;
 }
 
 header h1 {
-    margin: 0; /* Keeps the title aligned to the left */
+    margin: 0; /* No extra spacing so it sits next to the logo */
+    font-size: 1.2rem; /* thinner title */
 }
 
 header select {
-    padding: 5px;
+    padding: 4px; /* slightly smaller control */
 }

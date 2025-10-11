@@ -35,15 +35,39 @@
 
 .form-container label {
     display: block; /* Make each label take up its own line */
-    margin-bottom: 5px; /* Space between label and input field */
+    margin: 6px 0 4px; /* Slightly tighter and consistent spacing */
+}
+
+.form-container fieldset {
+    margin: 15px 0; /* Consistent spacing around groups */
 }
 
 /* Style for input fields */
+
+.form-container input {
+    margin: 5px 0;
+}
+
+
 .form-container input[type="text"],
 .form-container input[type="number"] {
     display: block; /* Make each input take up its own line */
+    width: 100%; /* Reasonable width without taking full row */
+    padding: 6px 8px; /* Compact padding */
+    border: 1.5px solid #8A2BE2; /* Visible violet border */
+    border-radius: 6px; /* Soft corners */
+    background-color: #ffffff; /* Ensure good contrast with page */
+    color: #222;
+    box-sizing: border-box;
 }
 
+/* Better focus state for accessibility */
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus {
+    outline: none;
+    border-color: #7D26CD;
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
+}
 
 /* Style for buttons */
 .form-container button {
@@ -59,13 +83,30 @@
 }
 
 .form-container button:hover {
-    background-color: #7D26CD; /* Slightly darker violet on hover */
+    background-color: #7912d9; /* Slightly darker violet on hover */
 }
 
 .operations-group {
     border: 2px solid #8A2BE2; /* Primary violet color */
-    padding: 10px;
+    padding: 7px;
     margin-bottom: 15px;
+    display: grid; /* Arrange operation checkboxes in a grid */
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-auto-rows: auto;
+    gap: 8px 16px; /* Row and column gaps */
+}
+
+/* Make the legend span across both columns */
+.operations-group > legend {
+    grid-column: 1 / -1;
+    margin-bottom: 2px;
+}
+
+/* Align checkbox and label text nicely */
+.operations-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* Mobile: stack action buttons and make them full width */

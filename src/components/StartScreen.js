@@ -121,39 +121,20 @@ function StartScreen(props) {
                         {t('startScreen.maxNumber')}
                         <input type="number" value={maxNumber} onChange={handleNumberChange}/>
                     </label>
-                    <br/>
                     <label>
                         {t('startScreen.equationsCount')}
                         <input type="number" value={numEquations} onChange={handleNumEquationsChange}/>
                     </label>
-                    <br/>
                     <label>
                         {t('startScreen.groupSize')}
-                        <input type="number" value={groupSize} onChange={handleGroupSizeChange} disabled={isGeneratingCombinations}/>
+                        <input type="number" value={groupSize} onChange={handleGroupSizeChange}
+                               disabled={isGeneratingCombinations}/>
                     </label>
-                    <br/>
                     <label>
                         {t('startScreen.maxResult')}
                         <input type="number" value={maxResult} onChange={handleMaxResultChange}/>
                     </label>
-                    <br/>
-                    <label>
-                        {t('startScreen.isNegativeAllowed')}
-                        <input
-                            type="checkbox"
-                            checked={allowNegativeResults}
-                            onChange={handleAllowNegativeResultsChange}
-                        />
-                    </label>
-                    <label>
-                        {t('startScreen.isGeneratingCombinations')}
-                        <input
-                            type="checkbox"
-                            checked={isGeneratingCombinations}
-                            onChange={handleIsGeneratingCombinationsChange}
-                        />
-                    </label>
-                    <br/>
+
                     <fieldset className="operations-group">
                         <legend>{t('startScreen.ops')}</legend>
                         <label>
@@ -177,11 +158,31 @@ function StartScreen(props) {
                             {t('startScreen.op.div')}
                         </label>
                     </fieldset>
-                    <br/>
+
+                    <fieldset className="operations-group">
+                        <legend>{t('startScreen.advanced')}</legend>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={allowNegativeResults}
+                                onChange={handleAllowNegativeResultsChange}
+                            />
+                            {t('startScreen.isNegativeAllowed')}
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={isGeneratingCombinations}
+                                onChange={handleIsGeneratingCombinationsChange}
+                            />
+                            {t('startScreen.isGeneratingCombinations')}
+                        </label>
+                    </fieldset>
+
                     {error && <div style={{color: 'red'}}>{error}</div>}
                     <div className="button-container">
-                        <button type="submit">{t('startScreen.solve')}</button>
                         <button type="button" onClick={handlePrint}>{t('startScreen.print')}</button>
+                        <button type="submit" className={"secondary-button"}>{t('startScreen.solve')}</button>
                     </div>
                 </form>
             </div>

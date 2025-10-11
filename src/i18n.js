@@ -16,6 +16,7 @@ await i18n
                         isNegativeAllowed: "Allow negative results",
                         isGeneratingCombinations: "Generate complementing operations",
                         ops: "Operations",
+                        advanced: "Advanced",
                         op: {
                             add: "Addition",
                             sub: "Subtraction",
@@ -47,6 +48,7 @@ await i18n
                         isNegativeAllowed: "Negative Ergebnisse zulassen",
                         isGeneratingCombinations: "Ergänzende Operationen generieren",
                         ops: "Operationen",
+                        advanced: "Erweitert",
                         op: {
                             add: "Addition",
                             sub: "Subtraktion",

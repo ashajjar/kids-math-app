@@ -1,11 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import '../styles/EquationDisplay.css';
 import {useTranslation} from "react-i18next";
+import {trackEvent} from '../analytics';
 
 function EquationDisplay({equations, onFinish, groupSize}) {
     const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
     const [answers, setAnswers] = useState(equations.map(() => ''));
     const inputRefs = useRef(equations.map(() => React.createRef()));
+
+    // track session start time
+    const startTimeRef = useRef(Date.now());
 
     useEffect(() => {
         // Focus the first input field of the current group
@@ -24,7 +28,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
     const handleAnswerKeyUp = (e, index) => {
         if (e.key === 'Enter') {
             if ((index + 1) >= equations.length) {
-                onFinish(answers);
+                handleFinish();
                 return;
             }
             if ((index + 1) % groupSize === 0) {
@@ -34,7 +38,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
             inputRefs.current[index + 1].current.focus()
         }
         if (e.key === 'Escape') {
-            onFinish(answers);
+            handleFinish();
         }
     };
 
@@ -49,6 +53,19 @@ function EquationDisplay({equations, onFinish, groupSize}) {
     };
 
     const {t} = useTranslation();
+
+    const handleFinish = () => {
+        const durationMs = Date.now() - startTimeRef.current;
+        const answeredCount = answers.filter(a => a !== '' && !Number.isNaN(a)).length;
+        trackEvent('session_finished', {
+            totalEquations: equations.length,
+            answeredCount,
+            groupsVisited: currentGroupIndex + 1,
+            groupSize,
+            durationSec: Math.round(durationMs / 1000)
+        });
+        onFinish(answers);
+    };
 
     return (
         <div className="equation-display">
@@ -74,7 +91,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
                 <button onClick={goToNextGroup}
                         disabled={currentGroupIndex === Math.ceil(equations.length / groupSize) - 1}
                         className="primary-button">{t('equations.next')}</button>
-                <button onClick={() => onFinish(answers)} className="primary-button">{t('equations.finish')}</button>
+                <button onClick={handleFinish} className="primary-button">{t('equations.finish')}</button>
             </div>
         </div>
     );

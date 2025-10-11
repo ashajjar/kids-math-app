@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/StartScreen.css';
 import {useTranslation} from 'react-i18next';
+import {trackEvent} from '../analytics';
 
 
 function StartScreen(props) {
@@ -59,6 +60,16 @@ function StartScreen(props) {
             return;
         }
         setError(''); // Clear any existing error
+        // analytics: printing worksheet
+        trackEvent('print_sheet', {
+            ops: Object.keys(operations).filter(k => operations[k]).join(','),
+            maxNumber,
+            numEquations,
+            groupSize,
+            maxResult,
+            allowNegativeResults,
+            isGeneratingCombinations,
+        });
         props.onPrint({
             maxNumber,
             numEquations,
@@ -81,6 +92,16 @@ function StartScreen(props) {
             return;
         }
         setError(''); // Clear any existing error
+        // analytics: start solving session
+        trackEvent('start_session', {
+            ops: Object.keys(operations).filter(k => operations[k]).join(','),
+            maxNumber,
+            numEquations,
+            groupSize,
+            maxResult,
+            allowNegativeResults,
+            isGeneratingCombinations,
+        });
         props.onStart({
             maxNumber,
             numEquations,

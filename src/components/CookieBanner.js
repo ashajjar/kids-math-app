@@ -67,11 +67,6 @@ function CookieBanner() {
     fontWeight: 'bold',
   };
 
-  const linkStyle = {
-    color: '#93c5fd',
-    textDecoration: 'underline',
-  };
-
   return (
     <div role="dialog" aria-live="polite" aria-label="Cookie and analytics notice" style={containerStyle}>
       <p style={textStyle}>

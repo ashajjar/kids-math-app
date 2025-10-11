@@ -41,6 +41,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 .primary-button:hover {

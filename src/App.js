@@ -4,6 +4,7 @@ import EquationDisplay from './components/EquationDisplay';
 import ReviewAnswers from './components/ReviewAnswers';
 import './i18n'; // Path to your i18n config file
 import Header from "./components/Header";
+import CookieBanner from "./components/CookieBanner";
 
 function App() {
     const [step, setStep] = useState(1);
@@ -59,6 +60,7 @@ function App() {
         <div className="App">
             <Header/>
             {renderStep()}
+            <CookieBanner/>
         </div>
     );
 }

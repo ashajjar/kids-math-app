@@ -54,6 +54,7 @@
     cursor: pointer; /* Cursor changes to pointer to indicate button */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-weight: bold;
 }
 
 .form-container button:hover {

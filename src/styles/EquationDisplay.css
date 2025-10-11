@@ -4,7 +4,7 @@
     display: flex; /* Enable Flexbox */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
-    justify-content: center; /* Center children vertically */
+    justify-content: flex-start; /* Align content to the top under the header */
     height: 100vh; /* Make the container fill the full viewport height */
     background-color: #E6E6FA; /* Light violet background */
     color: #8A2BE2; /* Primary violet color for text */
@@ -22,14 +22,14 @@
 /* Style for individual equations */
 .equation {
     margin-bottom: 15px; /* Space between each equation */
-    font-size: xxx-large;
+    font-size: xx-large;
 }
 
 .equation input {
     margin: 5px;
     width: 70px;
     height: 50px;
-    font-size: xxx-large;
+    font-size: xx-large;
     color: #9a64cb;
 }
 

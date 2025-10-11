@@ -11,11 +11,26 @@ function EquationDisplay({equations, onFinish, groupSize}) {
     // track session start time
     const startTimeRef = useRef(Date.now());
 
+    // Helper to ensure an input is visible when keyboard opens
+    const scrollInputIntoView = (inputEl) => {
+        if (!inputEl) return;
+        try {
+            // Delay to allow virtual keyboard and layout to settle
+            setTimeout(() => {
+                inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 50);
+        } catch (_) {
+            // no-op
+        }
+    };
+
     useEffect(() => {
         // Focus the first input field of the current group
         const firstInputIndex = currentGroupIndex * groupSize;
-        if (inputRefs.current[firstInputIndex]) {
-            inputRefs.current[firstInputIndex].current.focus();
+        const ref = inputRefs.current[firstInputIndex];
+        if (ref && ref.current) {
+            ref.current.focus();
+            scrollInputIntoView(ref.current);
         }
     }, [currentGroupIndex, groupSize]);
 
@@ -35,7 +50,11 @@ function EquationDisplay({equations, onFinish, groupSize}) {
                 goToNextGroup();
                 return;
             }
-            inputRefs.current[index + 1].current.focus()
+            const nextRef = inputRefs.current[index + 1];
+            if (nextRef && nextRef.current) {
+                nextRef.current.focus();
+                scrollInputIntoView(nextRef.current);
+            }
         }
         if (e.key === 'Escape') {
             handleFinish();
@@ -80,6 +99,7 @@ function EquationDisplay({equations, onFinish, groupSize}) {
                                 onChange={(e) => handleAnswerChange(e, currentGroupIndex * groupSize + index)}
                                 ref={inputRefs.current[currentGroupIndex * groupSize + index]}
                                 onKeyUp={(e) => handleAnswerKeyUp(e, currentGroupIndex * groupSize + index)}
+                                onFocus={(e) => scrollInputIntoView(e.target)}
                             />
                         </label>
                     </div>

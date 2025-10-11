@@ -5,10 +5,14 @@
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
     justify-content: flex-start; /* Align content to the top under the header */
-    height: 100vh; /* Make the container fill the full viewport height */
+    /* Use small viewport height to avoid 100vh issues when virtual keyboard opens */
+    min-height: 100svh;
+    /* Allow scrolling when content is taller (e.g., when keyboard opens) */
+    overflow-y: auto;
+    scroll-behavior: smooth;
     background-color: #E6E6FA; /* Light violet background */
     color: #8A2BE2; /* Primary violet color for text */
-    padding: 20px;
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 

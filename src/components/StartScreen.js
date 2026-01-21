@@ -1,24 +1,85 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/StartScreen.css';
 import {useTranslation} from 'react-i18next';
 import {trackEvent} from '../analytics';
 
 
-function StartScreen(props) {
-    const {t} = useTranslation();
-    const [minNumber, setMinNumber] = useState(0);
-    const [maxNumber, setMaxNumber] = useState(10);
-    const [maxResult, setMaxResult] = useState(10);
-    const [numEquations, setNumEquations] = useState(60);
-    const [operations, setOperations] = useState({
+const STORAGE_KEY = 'math_app_settings_v1';
+
+const DEFAULT_SETTINGS = {
+    minNumber: 0,
+    maxNumber: 10,
+    maxResult: 10,
+    numEquations: 60,
+    operations: {
         addition: true,
         subtraction: false,
         multiplication: false,
         division: false
-    });
-    const [groupSize, setGroupSize] = useState(5); // Default group size
-    const [allowNegativeResults, setAllowNegativeResults] = useState(false);
-    const [isGeneratingCombinations, setIsGeneratingCombinations] = useState(false);
+    },
+    groupSize: 5,
+    allowNegativeResults: false,
+    isGeneratingCombinations: false,
+};
+
+function loadSavedSettings() {
+    try {
+        const raw = typeof window !== 'undefined' && window.localStorage && window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) return DEFAULT_SETTINGS;
+        const parsed = JSON.parse(raw);
+        const merged = {
+            ...DEFAULT_SETTINGS,
+            ...parsed,
+            operations: {
+                ...DEFAULT_SETTINGS.operations,
+                ...(parsed && parsed.operations ? parsed.operations : {}),
+            },
+        };
+        if (merged.isGeneratingCombinations) merged.groupSize = 3;
+        return merged;
+    } catch (_) {
+        return DEFAULT_SETTINGS;
+    }
+}
+
+
+function StartScreen(props) {
+    const {t} = useTranslation();
+    const savedSettings = loadSavedSettings();
+    const [minNumber, setMinNumber] = useState(savedSettings.minNumber);
+    const [maxNumber, setMaxNumber] = useState(savedSettings.maxNumber);
+    const [maxResult, setMaxResult] = useState(savedSettings.maxResult);
+    const [numEquations, setNumEquations] = useState(savedSettings.numEquations);
+    const [operations, setOperations] = useState(savedSettings.operations);
+    const [groupSize, setGroupSize] = useState(savedSettings.groupSize);
+    const [allowNegativeResults, setAllowNegativeResults] = useState(savedSettings.allowNegativeResults);
+    const [isGeneratingCombinations, setIsGeneratingCombinations] = useState(savedSettings.isGeneratingCombinations);
+
+    useEffect(() => {
+        try {
+            const settingsToSave = {
+                minNumber,
+                maxNumber,
+                maxResult,
+                numEquations,
+                operations,
+                groupSize: isGeneratingCombinations ? 3 : groupSize,
+                allowNegativeResults,
+                isGeneratingCombinations,
+            };
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settingsToSave));
+        } catch (_) {
+        }
+    }, [
+        minNumber,
+        maxNumber,
+        maxResult,
+        numEquations,
+        operations,
+        groupSize,
+        allowNegativeResults,
+        isGeneratingCombinations,
+    ]);
 
     const handleAllowNegativeResultsChange = (e) => {
         setAllowNegativeResults(e.target.checked);

@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-await i18n
+i18n
     .use(initReactI18next) // Passes i18n down to react-i18next
     .init({
         resources: {
@@ -11,8 +11,6 @@ await i18n
                         title: "Kids Math",
                         minNumber: "Minimum Number",
                         maxNumber: "Maximum Number",
-                        maxResult: "Maximum Result",
-                        maxResultAdditionOnly: "applies for addition only",
                         equationsCount: "How many problems?",
                         groupSize: "Group size",
                         isNegativeAllowed: "Allow negative results",
@@ -45,8 +43,6 @@ await i18n
                         title: "Kinder Mathe",
                         minNumber: "Minimale Zahl",
                         maxNumber: "Maximale Zahl",
-                        maxResult: "Maximalergebnis",
-                        maxResultAdditionOnly: "gilt nur für Addition",
                         equationsCount: "Wie viele Aufgaben?",
                         groupSize: "Gruppengröße",
                         isNegativeAllowed: "Negative Ergebnisse zulassen",

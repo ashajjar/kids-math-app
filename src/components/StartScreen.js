@@ -9,7 +9,6 @@ const STORAGE_KEY = 'math_app_settings_v1';
 const DEFAULT_SETTINGS = {
     minNumber: 0,
     maxNumber: 10,
-    maxResult: 10,
     numEquations: 60,
     operations: {
         addition: true,
@@ -48,7 +47,6 @@ function StartScreen(props) {
     const savedSettings = loadSavedSettings();
     const [minNumber, setMinNumber] = useState(savedSettings.minNumber);
     const [maxNumber, setMaxNumber] = useState(savedSettings.maxNumber);
-    const [maxResult, setMaxResult] = useState(savedSettings.maxResult);
     const [numEquations, setNumEquations] = useState(savedSettings.numEquations);
     const [operations, setOperations] = useState(savedSettings.operations);
     const [groupSize, setGroupSize] = useState(savedSettings.groupSize);
@@ -60,7 +58,6 @@ function StartScreen(props) {
             const settingsToSave = {
                 minNumber,
                 maxNumber,
-                maxResult,
                 numEquations,
                 operations,
                 groupSize: isGeneratingCombinations ? 3 : groupSize,
@@ -73,7 +70,6 @@ function StartScreen(props) {
     }, [
         minNumber,
         maxNumber,
-        maxResult,
         numEquations,
         operations,
         groupSize,
@@ -106,10 +102,6 @@ function StartScreen(props) {
         setMaxNumber(parseInt(e.target.value));
     };
 
-    const handleMaxResultChange = (e) => {
-        setMaxResult(parseInt(e.target.value));
-    };
-
     const handleNumEquationsChange = (e) => {
         setNumEquations(parseInt(e.target.value));
     };
@@ -137,7 +129,6 @@ function StartScreen(props) {
             maxNumber,
             numEquations,
             groupSize,
-            maxResult,
             allowNegativeResults,
             isGeneratingCombinations,
         });
@@ -148,7 +139,6 @@ function StartScreen(props) {
             operations,
             groupSize,
             allowNegativeResults,
-            maxResult,
             isGeneratingCombinations
         });
     };
@@ -175,7 +165,6 @@ function StartScreen(props) {
             maxNumber,
             numEquations,
             groupSize,
-            maxResult,
             allowNegativeResults,
             isGeneratingCombinations,
         });
@@ -186,7 +175,6 @@ function StartScreen(props) {
             operations,
             groupSize,
             allowNegativeResults,
-            maxResult,
             isGeneratingCombinations,
         });
     };
@@ -203,19 +191,6 @@ function StartScreen(props) {
                         <label>
                             {t('startScreen.maxNumber')}
                             <input type="number" value={maxNumber} onChange={handleNumberChange}/>
-                        </label>
-                        <label>
-                            <span className="label-with-help">
-                                {t('startScreen.maxResult')}
-                                <span
-                                    className="help-icon"
-                                    title={t('startScreen.maxResultAdditionOnly')}
-                                    aria-label={t('startScreen.maxResultAdditionOnly')}
-                                >
-                                    ?
-                                </span>
-                            </span>
-                            <input type="number" value={maxResult} onChange={handleMaxResultChange}/>
                         </label>
                     </div>
 

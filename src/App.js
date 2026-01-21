@@ -116,14 +116,13 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function generateEquations(settings) {
+export function generateEquations(settings) {
     const {
         minNumber,
         maxNumber,
         numEquations,
         operations,
         allowNegativeResults,
-        maxResult,
         isGeneratingCombinations
     } = settings;
 
@@ -137,7 +136,7 @@ function generateEquations(settings) {
         division: '÷'
     };
     const enabledOperations = Object.entries(operations)
-        .filter(([op, isEnabled]) => isEnabled)
+        .filter(([_, isEnabled]) => isEnabled)
         .map(([op]) => op);
 
     for (let i = 0; i < number; i++) {
@@ -145,7 +144,6 @@ function generateEquations(settings) {
         let b = getRandomInt(minNumber, maxNumber);
         const operation = enabledOperations[Math.floor(Math.random() * enabledOperations.length)];
         const symbol = operationSymbols[operation];
-
 
         if (!allowNegativeResults && operation === 'subtraction' && a < b) {
             [a, b] = [b, a]; // Swap to avoid negative result
@@ -158,11 +156,7 @@ function generateEquations(settings) {
             a = a * b; // to make sure only integers are generated
         }
 
-        if (operation === 'addition' && a + b > maxResult + 1) {
-            let diff = Math.floor(((a + b) - maxResult + 1) / 2);
-            a -= diff;
-            b -= diff;
-        }
+        // maxResult is now inferred; for addition the maximum result is simply (a + b).
 
         const equation = `${a} ${symbol} ${b}`;
         equations.push(equation);

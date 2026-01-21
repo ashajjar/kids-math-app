@@ -58,7 +58,7 @@ function App() {
 
     return (
         <div className="App">
-            <Header/>
+            <Header onHome={handleRestart} />
             {renderStep()}
             <CookieBanner/>
         </div>

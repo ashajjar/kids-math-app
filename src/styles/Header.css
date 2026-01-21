@@ -22,6 +22,10 @@ header .brand {
     gap: 10px; /* space between logo and title */
 }
 
+header .brand {
+    cursor: pointer;
+}
+
 header img {
     height: 28px; /* thinner logo */
     width: auto;

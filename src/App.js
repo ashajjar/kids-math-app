@@ -103,8 +103,29 @@ function generateComplementingEquations(equations, a, b, operation) {
     }
 }
 
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ */
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function generateEquations(settings) {
-    const {maxNumber, numEquations, operations, allowNegativeResults, maxResult, isGeneratingCombinations} = settings;
+    const {
+        minNumber,
+        maxNumber,
+        numEquations,
+        operations,
+        allowNegativeResults,
+        maxResult,
+        isGeneratingCombinations
+    } = settings;
 
     const numEquationsModifier = isGeneratingCombinations ? 3 : 1;
     let number = (numEquations / numEquationsModifier) + (isGeneratingCombinations ? 1 : 0);
@@ -120,8 +141,8 @@ function generateEquations(settings) {
         .map(([op]) => op);
 
     for (let i = 0; i < number; i++) {
-        let a = Math.floor(Math.random() * (maxNumber + 1));
-        let b = Math.floor(Math.random() * (maxNumber + 1));
+        let a = getRandomInt(minNumber, maxNumber);
+        let b = getRandomInt(minNumber, maxNumber);
         const operation = enabledOperations[Math.floor(Math.random() * enabledOperations.length)];
         const symbol = operationSymbols[operation];
 

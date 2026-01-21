@@ -9,6 +9,7 @@ await i18n
                 translation: {
                     startScreen: {
                         title: "Kids Math",
+                        minNumber: "Minimum Number",
                         maxNumber: "Maximum Number",
                         maxResult: "Maximum Result (applies for addition only)",
                         equationsCount: "Equation count to generate",
@@ -41,6 +42,7 @@ await i18n
                 translation: {
                     startScreen: {
                         title: "Kinder Mathe",
+                        minNumber: "Minimale Zahl",
                         maxNumber: "Maximale Zahl",
                         maxResult: "Maximalergebnis (gilt nur für Addition)",
                         equationsCount: "Anzahl der zu generierenden Gleichungen",

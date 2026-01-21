@@ -6,6 +6,7 @@ import {trackEvent} from '../analytics';
 
 function StartScreen(props) {
     const {t} = useTranslation();
+    const [minNumber, setMinNumber] = useState(0);
     const [maxNumber, setMaxNumber] = useState(10);
     const [maxResult, setMaxResult] = useState(10);
     const [numEquations, setNumEquations] = useState(60);
@@ -36,6 +37,10 @@ function StartScreen(props) {
         setGroupSize(parseInt(e.target.value));
     };
 
+    const handleMinNumberChange = (e) => {
+        setMinNumber(parseInt(e.target.value));
+    };
+
     const handleNumberChange = (e) => {
         setMaxNumber(parseInt(e.target.value));
     };
@@ -59,10 +64,15 @@ function StartScreen(props) {
             setError('Please select at least one operation.');
             return;
         }
+        if (minNumber > maxNumber) {
+            setError('Minimum number cannot be greater than maximum number.');
+            return;
+        }
         setError(''); // Clear any existing error
         // analytics: printing worksheet
         trackEvent('print_sheet', {
             ops: Object.keys(operations).filter(k => operations[k]).join(','),
+            minNumber,
             maxNumber,
             numEquations,
             groupSize,
@@ -71,6 +81,7 @@ function StartScreen(props) {
             isGeneratingCombinations,
         });
         props.onPrint({
+            minNumber,
             maxNumber,
             numEquations,
             operations,
@@ -91,10 +102,15 @@ function StartScreen(props) {
             setError('Please select at least one operation.');
             return;
         }
+        if (minNumber >= maxNumber) {
+            setError('Minimum number cannot be greater than maximum number.');
+            return;
+        }
         setError(''); // Clear any existing error
         // analytics: start solving session
         trackEvent('start_session', {
             ops: Object.keys(operations).filter(k => operations[k]).join(','),
+            minNumber,
             maxNumber,
             numEquations,
             groupSize,
@@ -103,6 +119,7 @@ function StartScreen(props) {
             isGeneratingCombinations,
         });
         props.onStart({
+            minNumber,
             maxNumber,
             numEquations,
             operations,
@@ -117,6 +134,10 @@ function StartScreen(props) {
         <div className="start-screen">
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
+                    <label>
+                        {t('startScreen.minNumber')}
+                        <input type="number" value={minNumber} onChange={handleMinNumberChange}/>
+                    </label>
                     <label>
                         {t('startScreen.maxNumber')}
                         <input type="number" value={maxNumber} onChange={handleNumberChange}/>

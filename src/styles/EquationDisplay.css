@@ -10,8 +10,8 @@
     /* Allow scrolling when content is taller (e.g., when keyboard opens) */
     overflow-y: auto;
     scroll-behavior: smooth;
-    background-color: #E6E6FA; /* Light violet background */
-    color: #8A2BE2; /* Primary violet color for text */
+    background-color: transparent;
+    color: var(--text);
     padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
     box-sizing: border-box; /* Include padding in the width calculation */
 }
@@ -21,12 +21,19 @@
     max-width: 600px; /* Maximum width */
     text-align: center; /* Center the content */
     margin-bottom: 20px; /* Space between equations and navigation buttons */
+    padding: 18px 16px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
 }
 
 /* Style for individual equations */
 .equation {
     margin-bottom: 15px; /* Space between each equation */
     font-size: xx-large;
+    letter-spacing: 0.2px;
 }
 
 .equation input {
@@ -34,41 +41,63 @@
     width: 70px;
     height: 50px;
     font-size: xx-large;
-    color: #9a64cb;
+    color: var(--text);
+    background: var(--surface-solid);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
+}
+
+.equation input:focus {
+    outline: none;
+    border-color: rgba(164, 221, 249, 0.9);
+    box-shadow: var(--focus-ring);
 }
 
 .primary-button {
-    background-color: #8A2BE2; /* Primary violet color */
-    color: white;
-    border: none;
+    background: linear-gradient(90deg, rgba(164, 221, 249, 0.95), rgba(197, 164, 247, 0.95));
+    color: #243041;
+    border: 1px solid rgba(255, 255, 255, 0.65);
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.12s ease, filter 0.2s ease, box-shadow 0.2s ease;
     font-weight: bold;
+    box-shadow: var(--shadow-sm);
 }
 
 .primary-button:hover {
-    background-color: #7D26CD; /* Slightly darker violet on hover */
+    filter: brightness(0.98);
+}
+
+.primary-button:active {
+    transform: translateY(1px);
 }
 
 .primary-button:disabled{
-    background-color: #9F90C1;
+    opacity: 0.6;
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .secondary-button {
-    background-color: #B0A1D3; /* Lighter violet or another secondary color */
-    color: white;
-    border: none;
+    background: linear-gradient(90deg, rgba(166, 235, 212, 0.95), rgba(253, 231, 140, 0.95));
+    color: #243041;
+    border: 1px solid rgba(255, 255, 255, 0.65);
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: transform 0.12s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .secondary-button:hover {
-    background-color: #9F90C1; /* Slightly darker version of the secondary color */
+    filter: brightness(0.98);
+}
+
+.secondary-button:active {
+    transform: translateY(1px);
 }
 
 .button-container button {

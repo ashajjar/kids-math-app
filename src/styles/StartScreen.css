@@ -5,14 +5,14 @@
 /*}*/
 
 .start-screen {
-    color: #8A2BE2;
+    color: var(--text);
     display: flex; /* Enable Flexbox */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
     justify-content: flex-start; /* Start content near the header */
     min-height: 100vh; /* Ensure background fills screen without forcing vertical centering */
     padding-top: 8px; /* Small space below sticky header */
-    background-color: #E6E6FA; /* Light violet background */
+    background-color: transparent;
 }
 
 .form-container {
@@ -20,6 +20,12 @@
     max-width: 600px; /* Maximum width of the form */
     padding: 20px;
     box-sizing: border-box; /* Include padding in the width calculation */
+    margin: 14px 0 22px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
 }
 
 .start-screen h1 {
@@ -36,6 +42,7 @@
 .form-container label {
     display: block; /* Make each label take up its own line */
     margin: 6px 0 4px; /* Slightly tighter and consistent spacing */
+    color: var(--text);
 }
 
 .form-container fieldset {
@@ -54,46 +61,61 @@
     display: block; /* Make each input take up its own line */
     width: 100%; /* Reasonable width without taking full row */
     padding: 6px 8px; /* Compact padding */
-    border: 1.5px solid #8A2BE2; /* Visible violet border */
-    border-radius: 6px; /* Soft corners */
-    background-color: #ffffff; /* Ensure good contrast with page */
-    color: #222;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-solid);
+    color: var(--text);
     box-sizing: border-box;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 /* Better focus state for accessibility */
 .form-container input[type="text"]:focus,
 .form-container input[type="number"]:focus {
     outline: none;
-    border-color: #7D26CD;
-    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
+    border-color: rgba(164, 221, 249, 0.9);
+    box-shadow: var(--focus-ring);
 }
 
 /* Style for buttons */
 .form-container button {
-    background-color: #8A2BE2; /* Primary violet color */
-    color: white; /* White text for contrast */
-    border: none; /* Remove default border */
+    background: linear-gradient(90deg, rgba(255, 154, 179, 0.92), rgba(255, 180, 128, 0.92));
+    color: #243041;
+    border: 1px solid rgba(255, 255, 255, 0.65);
     padding: 10px 15px; /* Padding for better sizing */
     margin-top: 10px; /* Space above the button */
     cursor: pointer; /* Cursor changes to pointer to indicate button */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    border-radius: 999px;
+    transition: transform 0.12s ease, filter 0.2s ease, box-shadow 0.2s ease;
     font-weight: bold;
+    box-shadow: var(--shadow-sm);
 }
 
 .form-container button:hover {
-    background-color: #7912d9; /* Slightly darker violet on hover */
+    filter: brightness(0.98);
+}
+
+.form-container button:active {
+    transform: translateY(1px);
+}
+
+.form-container button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .operations-group {
-    border: 2px solid #8A2BE2; /* Primary violet color */
+    border: 1.5px solid rgba(197, 164, 247, 0.65);
     padding: 7px;
     margin-bottom: 15px;
     display: grid; /* Arrange operation checkboxes in a grid */
     grid-template-columns: repeat(2, 1fr); /* Two columns */
     grid-auto-rows: auto;
     gap: 8px 16px; /* Row and column gaps */
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Make the legend span across both columns */
@@ -107,6 +129,10 @@
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.operations-group input[type="checkbox"] {
+    accent-color: #C5A4F7;
 }
 
 /* Mobile: stack action buttons and make them full width */

@@ -1,8 +1,8 @@
 /* ReviewAnswers.css */
 
 .review-answers {
-    background-color: #E6E6FA; /* Light violet background */
-    color: #8A2BE2; /* Primary violet color for text */
+    background-color: transparent;
+    color: var(--text);
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -12,18 +12,25 @@
     width: 80%; /* Adjust width as needed */
     border-collapse: collapse; /* Remove space between table cells */
     margin: auto auto 30px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .review-table th, .review-table td {
-    border: 1px solid #8A2BE2; /* Violet border for table cells */
+    border: 1px solid rgba(36, 48, 65, 0.12);
     padding: 8px; /* Padding inside cells */
     text-align: center;
 }
 
 .correct-answer {
-    color: green; /* Green color for correct answers */
+    color: #14532D;
+    background: rgba(166, 235, 212, 0.35);
 }
 
 .incorrect-answer {
-    color: red; /* Red color for incorrect answers */
+    color: #7A1F2B;
+    background: rgba(255, 154, 179, 0.30);
 }

@@ -15,7 +15,6 @@ function Header() {
         <header>
             <div className="brand">
                 <img src={logo} alt="Logo"/>
-                <h1>{t('startScreen.title')}</h1>
             </div>
             <select value={i18n.language} onChange={(e) => changeLanguage(e.target.value)}>
                 <option value="en">English</option>

@@ -1,12 +1,9 @@
 import React from 'react';
 import i18n from "../i18n";
 import '../styles/Header.css'
-import {useTranslation} from "react-i18next";
 import logo from '../resources/logo.png'
 
 function Header() {
-    const {t} = useTranslation();
-
     const changeLanguage = (language) => {
         i18n.changeLanguage(language).catch(err => console.error(err));
     };

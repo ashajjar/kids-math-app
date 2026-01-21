@@ -134,27 +134,41 @@ function StartScreen(props) {
         <div className="start-screen">
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    <label>
-                        {t('startScreen.minNumber')}
-                        <input type="number" value={minNumber} onChange={handleMinNumberChange}/>
-                    </label>
-                    <label>
-                        {t('startScreen.maxNumber')}
-                        <input type="number" value={maxNumber} onChange={handleNumberChange}/>
-                    </label>
-                    <label>
-                        {t('startScreen.equationsCount')}
-                        <input type="number" value={numEquations} onChange={handleNumEquationsChange}/>
-                    </label>
-                    <label>
-                        {t('startScreen.groupSize')}
-                        <input type="number" value={groupSize} onChange={handleGroupSizeChange}
-                               disabled={isGeneratingCombinations}/>
-                    </label>
-                    <label>
-                        {t('startScreen.maxResult')}
-                        <input type="number" value={maxResult} onChange={handleMaxResultChange}/>
-                    </label>
+                    <div className="start-screen-row">
+                        <label>
+                            {t('startScreen.minNumber')}
+                            <input type="number" value={minNumber} onChange={handleMinNumberChange}/>
+                        </label>
+                        <label>
+                            {t('startScreen.maxNumber')}
+                            <input type="number" value={maxNumber} onChange={handleNumberChange}/>
+                        </label>
+                        <label>
+                            <span className="label-with-help">
+                                {t('startScreen.maxResult')}
+                                <span
+                                    className="help-icon"
+                                    title={t('startScreen.maxResultAdditionOnly')}
+                                    aria-label={t('startScreen.maxResultAdditionOnly')}
+                                >
+                                    ?
+                                </span>
+                            </span>
+                            <input type="number" value={maxResult} onChange={handleMaxResultChange}/>
+                        </label>
+                    </div>
+
+                    <div className="start-screen-row">
+                        <label>
+                            {t('startScreen.equationsCount')}
+                            <input type="number" value={numEquations} onChange={handleNumEquationsChange}/>
+                        </label>
+                        <label>
+                            {t('startScreen.groupSize')}
+                            <input type="number" value={groupSize} onChange={handleGroupSizeChange}
+                                   disabled={isGeneratingCombinations}/>
+                        </label>
+                    </div>
 
                     <fieldset className="operations-group">
                         <legend>{t('startScreen.ops')}</legend>

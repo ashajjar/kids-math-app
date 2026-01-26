@@ -24,7 +24,7 @@ i18n
                             div: "Division"
                         },
                         solve: "Start Solving",
-                        print: "Print Equations",
+                        print: "Print Exercises",
                     },
                     equations: {
                         next: 'Next',
@@ -56,7 +56,7 @@ i18n
                             div: "Division"
                         },
                         solve: "Mit dem Lösen beginnen",
-                        print: "Gleichungen drucken",
+                        print: "Aufgaben drucken",
                     },
                     equations: {
                         next: 'Weiter',
